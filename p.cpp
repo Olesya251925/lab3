@@ -4,7 +4,7 @@ namespace MatrixAB
     class MatrixFound
     {
         private int Size;
-        private double[,] Arry;
+        private double[] Arry;
 
         public MatrixFound() { }
         public int SizeN
@@ -129,7 +129,6 @@ namespace MatrixAB
             }
             return Result;
         }
-        //Деление
         public static MatrixFound operator /(MatrixFound A, MatrixFound B)
         {
             var Result = new MatrixFound(A.SizeN);
