@@ -69,8 +69,6 @@ namespace MatrixAB
                     break;
             }
             Console.ReadKey();
-            
-
         }
     }
 }
