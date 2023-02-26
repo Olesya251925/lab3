@@ -7,11 +7,10 @@ namespace MatrixAB
         {
             Console.WriteLine("Размерность Квадратной Матрицы: ");
             int Size = int.Parse(Console.ReadLine());
-            MatrixInf MatrixA = new MatrixInf(Size);
-            MatrixInf MatrixB = new MatrixInf(Size);
-           // MatrixInf MatrixC;
-            MatrixA.Generate();
-            MatrixB.Generate();
+            MatrixInf MatrixA = new MatrixFound(Size);
+            MatrixInf MatrixB = new MatrixFound(Size);
+            MatrixA.Produce();
+            MatrixB.Produce();
             Console.WriteLine(MatrixA.ToString());
             Console.WriteLine(MatrixB.ToString());
 
@@ -57,9 +56,9 @@ namespace MatrixAB
                         var inverseA = MatrixA.Inverse(MatrixA);
                         Console.WriteLine($"Инверсия Матрицы:\n{inverseA}");
                     }
-                    catch (MatrixNotInvertibleException ex)
+                    catch (NotInvertibleMatrix ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine("Матрица не имеет инверсии");
                     }
                     break;
                 default:
