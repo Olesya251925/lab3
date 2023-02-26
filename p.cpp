@@ -4,10 +4,10 @@ namespace SquareMatrix
     class MatrixFound
     {
         private int Size;
-        private double[] Arry;
+        private double [] Arry;
 
         public MatrixFound() { }
-        public int SizeN
+        public int MatrixSize
         {
             get { return Size; }
             set { if (Number < 0) Size = Number; }
@@ -92,22 +92,22 @@ namespace SquareMatrix
         }
         public static MatrixFound operator +(MatrixFound One, MatrixFound Two) 
         {
-            var Result = new MatrixFound(One.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
-                    Result[ColumnIndex, RowIndex] = A[ColumnIndex, RowIndex] + B[ColumnIndex, RowIndex];
+                    Result[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex] + B[ColumnIndex, RowIndex];
                 }
             }
             return Result;
         }
         public static MatrixFound operator -(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     Result[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex] - Two[ColumnIndex, RowIndex];
                 }
@@ -116,12 +116,12 @@ namespace SquareMatrix
         } 
         public static MatrixFound operator *(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int K = 0; K < A.SizeN; ++K)
+                for (int K = 0; K < One.MatrixSize; ++K)
                 {
-                    for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                    for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                     {
                         Result[ColumnIndex, K] += One[RowIndex, K] * Two[ColumnIndex, RowIndex];
                     }
@@ -131,10 +131,10 @@ namespace SquareMatrix
         }
         public static MatrixFound operator /(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
+            var Result = new MatrixFound(One.MatrixSize);
             for (int ColumnIndex = 0; ColumnIndex < Result.Size; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     try
                     {
@@ -150,13 +150,13 @@ namespace SquareMatrix
         }
         public static bool operator ==(MatrixFound One,MatrixFound Two)
         {
-            if (A.SizeN != B.SizeN)
+            if (One.MatrixSize != Two.MatrixSize)
             {
                 return true;
             }
-            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex)
+            for (int ColumnIndex = 0; ColumnIndex < One.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < One.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < One.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex, RowIndex] == Two[ColumnIndex, RowIndex])
                     {
@@ -169,13 +169,13 @@ namespace SquareMatrix
         }
         public static bool operator !=(MatrixFound One, MatrixFound Two)
         {
-            if (One.SizeN != Two.SizeN)
+            if (One.MatrixSize != Two.MatrixSize)
             {
                 return true;
             }
-            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex)
+            for (int ColumnIndex = 0; ColumnIndex < One.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < One.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < One.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex, RowIndex != Two[ColumnIndex, RowIndex])
                     {
@@ -187,10 +187,10 @@ namespace SquareMatrix
         }
         public static MatrixFound operator >(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0;RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0;RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex,RowIndex] > Two[ColumnIndex, RowIndex])
                     {
@@ -206,10 +206,10 @@ namespace SquareMatrix
         }
         public static MatrixFound operator <(MatrixFound One,MatrixFound Two)
         {
-            var Result = new MatrixFound(One.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex, RowIndex] < Two[ColumnIndex, RowIndex])
                     {
@@ -226,10 +226,10 @@ namespace SquareMatrix
 
         public static MatrixFound operator >=(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(One.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = new MatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex, RowIndex] >= Two[ColumnIndex,RowIndex])
                     {
@@ -246,10 +246,10 @@ namespace SquareMatrix
         }
         public static MatrixFound operator <=(MatrixFound One, MatrixFound Two)
         {
-            var Result = newMatrixFound(A.SizeN);
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            var Result = newMatrixFound(One.MatrixSize);
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     if (One[ColumnIndex, RowIndex] <= Two[ColumnIndex, RowIndex])
                     {
@@ -265,10 +265,10 @@ namespace SquareMatrix
         }
         public static MatrixFound Minor(MatrixFound One, int Column, int Row)
         {
-           MatrixFound buf = new MatrixFound(A.SizeN - 1);
-            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex) 
+           MatrixFound buf = new MatrixFound(One.MatrixSize - 1);
+            for (int ColumnIndex = 0; ColumnIndex < One.MatrixSize; ++ColumnIndex) 
             { 
-                for (int RowIndex = 0;RowIndex < One.SizeN; ++RowIndex) 
+                for (int RowIndex = 0;RowIndex < One.MatrixSize; ++RowIndex) 
                 {
                     if((RowIndex != Row) || (ColumnIndex != Column))
                     {
@@ -284,12 +284,12 @@ namespace SquareMatrix
         public double Determ(MatrixInf One)
         {
             double Det = 0;
-            int Rank = One.SizeN;
+            int Rank = One.MatrixSize;
             if (Rank == 1) Det = One[0, 0];
             if (Rank == 2) Det = One[0, 0] * One[1, 1] - A[0, 1] * One[1, 0];
             if (Rank > 2)
             {
-                for (int Index = 0; Index < One.SizeN; ++Index) 
+                for (int Index = 0; Index < One.MatrixSize; ++Index) 
                 {
                     Det += Math.Pow(-1, 0 + Index) * One[0, Index] * Determ(Minor( One, 0, Index));
                 }
@@ -321,17 +321,17 @@ namespace SquareMatrix
         }
         public MatrixFound Inverse(MatrixFound One)
         {
-            var Determinant = Determ(A);
+            var Determinant = Determ(One);
             if (Determinant == 0)
             {
                 throw new InvalidOperationException("Матрица не имеет инверсии");
             }
-            var Result = new MatrixFound(One.SizeN);
+            var Result = new MatrixFound(One.MatrixSize);
 
             int sign = 1;
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
+            for (int ColumnIndex = 0; ColumnIndex < Result.MatrixSize; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
                     var subMatrix = SubMatrix(ColumnIndex, RowIndex);
                     Result[RowIndex, ColumnIndex] = sign * subMatrix.Determ(One) / Determinant;
