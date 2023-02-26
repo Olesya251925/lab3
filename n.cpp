@@ -2,62 +2,62 @@
 * Лабараторная работа № 3 *
 ***************************/
 using System;
-namespace MatrixAB
+namespace SquareMatrix
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Размерность Квадратной Матрицы: ");
+            Console.WriteLine("Размер квадратной матрицы: ");
             int Size = int.Parse(Console.ReadLine());
-            MatrixInf MatrixA = new MatrixFound(Size);
-            MatrixInf MatrixB = new MatrixFound(Size);
+            MatrixInf MatrixOne = new MatrixFound(Size);
+            MatrixInf MatrixTwo = new MatrixFound(Size);
             MatrixA.Produce();
             MatrixB.Produce();
-            Console.WriteLine(MatrixA.ToString());
-            Console.WriteLine(MatrixB.ToString());
+            Console.WriteLine(MatrixOne.ToString());
+            Console.WriteLine(MatrixTwo.ToString());
 
-            Console.WriteLine("\nМеню:: ");
-            Console.WriteLine("1. Сложение\n2. Вычитание\n3. Умножение\n4. Деление\n5. Равно\n6. Сравнение >\n7. Сравнение <\n8. Сравнение >=\n" 
-                " 9. Сравнение <=\n10. Найти Определитель\n11. Обратная матрица\n");
+            Console.WriteLine("\nМеню: ");
+            Console.WriteLine("1. Сложение +\n2. Вычитание -\n3. Умножение *\n4. Деление /\n5. Равно =\n6. Сравнение(больше) >\n7. Сравнение(меньше) <\n" 
+                "8. Сравнение (больше равно) >=\n 9. Сравнение (меньше равно) <=\n10. Найти Определитель\n11. Обратная матрица\n");
             string choice = Console.ReadLine();
             switch (choice) 
             {
                 case "1":
-                    Console.WriteLine($"MatrixA + MatrixB \n{MatrixA + MatrixB}");
+                    Console.WriteLine($"MatrixOne + MatrixTwo \n{MatrixOne + MatrixTwo}");
                     break;
                 case "2":
-                    Console.WriteLine($"MatrixA - MatrixB \n{MatrixA - MatrixB}");
+                    Console.WriteLine($"MatrixOne - MatrixTwo \n{MatrixOne - MatrixTwo}");
                     break;
                 case "3":
-                    Console.WriteLine($"MatrixA * MatrixB \n{MatrixA * MatrixB}");
+                    Console.WriteLine($"MatrixOne * MatrixTwo \n{MatrixOne * MatrixTwo}");
                     break;
                 case "4":
-                    Console.WriteLine($"MatrixA / MatrixB \n{MatrixA / MatrixB}");
+                    Console.WriteLine($"MatrixOne / MatrixTwo \n{MatrixOne / MatrixTwo}");
                     break;
                 case "5":
-                    Console.WriteLine($"MatrixA == MatrixB: {MatrixA == MatrixB}");
+                    Console.WriteLine($"MatrixOne == MatrixTwo: {MatrixOne == MatrixTwo}");
                     break;
                 case "6":
-                    Console.WriteLine($"MatrixA > MatrixB: {MatrixA > MatrixB}");
+                    Console.WriteLine($"MatrixOne > MatrixTwo: {MatrixOne > MatrixTwo}");
                     break;
                 case "7":
-                    Console.WriteLine($"MatrixA < MatrixB: {MatrixA < MatrixB}");
+                    Console.WriteLine($"MatriOnexOne < MatrixTwo: {MatrixOne < MatrixTwo}");
                     break;
                 case "8":
-                    Console.WriteLine($"MatrixA >= MatrixB: {MatrixA >= MatrixB}");
+                    Console.WriteLine($"MatrixOne >= MatrixTwo: {MatrixOne >= MatrixTwo}");
                     break;
                 case "9":
-                    Console.WriteLine($"MatrixA <= MatrixB: {MatrixA <= MatrixB}");
+                    Console.WriteLine($"MatrixOne <= MatrixTwo: {MatrixOne <= MatrixTwo}");
                     break;
                 case "10":
-                    Console.WriteLine($"Determinant of MatrixA: {MatrixA.Determ(MatrixA)}");
+                    Console.WriteLine($"Determinant of MatrixOne: {MatrixOne.Determ(MatrixOne)}");
                     break;
                 case "11":
                     try
                     {
-                        var inverseA = MatrixA.Inverse(MatrixA);
-                        Console.WriteLine($"Инверсия Матрицы:\n{inverseA}");
+                        var inverseOne = MatrixOne.Inverse(MatrixOne);
+                        Console.WriteLine($"Инверсия Матрицы:\n{inverseOne}");
                     }
                     catch (NotInvertibleMatrix ex)
                     {
