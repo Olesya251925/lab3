@@ -90,7 +90,6 @@ namespace MatrixAB
                 return hashCode;
             }
         }
-        //Сложение
         public static MatrixFound operator +(MatrixFound A, MatrixFound B) 
         {
             var Result = new MatrixFound(A.SizeN);
@@ -103,7 +102,6 @@ namespace MatrixAB
             }
             return Result;
         }
-        //Вычитание
         public static MatrixFound operator -(MatrixFound A, MatrixFound B)
         {
             var Result = new MatrixFound(A.SizeN);
@@ -115,8 +113,7 @@ namespace MatrixAB
                 }
             }
             return Result;
-        }
-        //Умножение 
+        } 
         public static MatrixFound operator *(MatrixFound A,MatrixFound B)
         {
             var Result = new MatrixFound(A.SizeN);
@@ -152,7 +149,6 @@ namespace MatrixAB
             }
             return Result;
         }
-        //Операторы сравнения
         public static bool operator ==(MatrixFound A,MatrixFound B)
         {
             if (A.SizeN != B.SizeN)
@@ -268,7 +264,6 @@ namespace MatrixAB
             }
             return Result;
         }
-        //Поиск Минора и по нему находим определитель. 
         public static MatrixFound Minor(MatrixFound A, int Column, int Row)
         {
            MatrixFound buf = new MatrixFound(A.SizeN - 1);
@@ -325,7 +320,6 @@ namespace MatrixAB
             }
             return subMatrix;
         }
-
         public MatrixFound Inverse(MatrixFound A)
         {
             var Determinant = Determ(A);
@@ -348,7 +342,6 @@ namespace MatrixAB
 
             return Result;
         }
-
         public override string ToString()
         {
             string Result = $"Размеры: {Size} x {Size}\n";
