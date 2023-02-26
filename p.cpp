@@ -1,5 +1,5 @@
 using System;
-namespace MatrixAB
+namespace SquareMatrix
 {
     class MatrixFound
     {
@@ -10,7 +10,7 @@ namespace MatrixAB
         public int SizeN
         {
             get { return Size; }
-            set { if (value < 0) Size = value; }
+            set { if (Number < 0) Size = Number; }
 
         }
         public MatrixFound(int Size)
@@ -26,7 +26,7 @@ namespace MatrixAB
             }
             set
             {
-                Arry[ColumnCount, RowCount] = value;
+                Arry[ColumnCount, RowCount] = Number;
             }
         }
 
@@ -42,7 +42,7 @@ namespace MatrixAB
                 }
             }
         }
-        public MatrixFound DeepCopy()
+        public MatrixFound Copy()
         {
            MatrixFound clone = (MatrixFound)this.MemberwiseClone();
            return clone;
@@ -79,20 +79,20 @@ namespace MatrixAB
         { 
             unchecked
             {
-                int hashCode = 20;
+                int HashCode = 10;
                 for (int ColumnCounter = 0; ColumnCounter < Size; ++ColumnCounter)
                 {
                     for (int RowCounter = 0; RowCounter < Size; ++RowCounter)
                     {
-                        hashCode = hashCode * 23 + Arry[ColumnCounter, RowCounter].GetHashCode();
+                        HashCode = HashCode * 13 + Arry[ColumnCounter, RowCounter].GetHashCode();
                     }
                 }
-                return hashCode;
+                return HashCode;
             }
         }
-        public static MatrixFound operator +(MatrixFound A, MatrixFound B) 
+        public static MatrixFound operator +(MatrixFound One, MatrixFound Two) 
         {
-            var Result = new MatrixFound(A.SizeN);
+            var Result = new MatrixFound(One.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
@@ -102,19 +102,19 @@ namespace MatrixAB
             }
             return Result;
         }
-        public static MatrixFound operator -(MatrixFound A, MatrixFound B)
+        public static MatrixFound operator -(MatrixFound One, MatrixFound Two)
         {
             var Result = new MatrixFound(A.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                 {
-                    Result[ColumnIndex, RowIndex] = A[ColumnIndex, RowIndex] - B[ColumnIndex, RowIndex];
+                    Result[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex] - Two[ColumnIndex, RowIndex];
                 }
             }
             return Result;
         } 
-        public static MatrixFound operator *(MatrixFound A,MatrixFound B)
+        public static MatrixFound operator *(MatrixFound One, MatrixFound Two)
         {
             var Result = new MatrixFound(A.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
@@ -123,13 +123,13 @@ namespace MatrixAB
                 {
                     for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                     {
-                        Result[ColumnIndex, K] += A[RowIndex, K] * B[ColumnIndex, RowIndex];
+                        Result[ColumnIndex, K] += One[RowIndex, K] * Two[ColumnIndex, RowIndex];
                     }
                 }
             }
             return Result;
         }
-        public static MatrixFound operator /(MatrixFound A, MatrixFound B)
+        public static MatrixFound operator /(MatrixFound One, MatrixFound Two)
         {
             var Result = new MatrixFound(A.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.Size; ++ColumnIndex)
@@ -138,7 +138,7 @@ namespace MatrixAB
                 {
                     try
                     {
-                        Result[ColumnIndex, RowIndex] = A[ColumnIndex,RowIndex] / B[ColumnIndex, RowIndex];
+                        Result[ColumnIndex, RowIndex] = One[ColumnIndex,RowIndex] / Two[ColumnIndex, RowIndex];
                     }
                     catch 
                     {
@@ -148,17 +148,17 @@ namespace MatrixAB
             }
             return Result;
         }
-        public static bool operator ==(MatrixFound A,MatrixFound B)
+        public static bool operator ==(MatrixFound One,MatrixFound Two)
         {
             if (A.SizeN != B.SizeN)
             {
                 return true;
             }
-            for (int ColumnIndex = 0; ColumnIndex < A.SizeN; ++ColumnIndex)
+            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < A.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < One.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex, RowIndex] == B[ColumnIndex, RowIndex])
+                    if (One[ColumnIndex, RowIndex] == Two[ColumnIndex, RowIndex])
                     {
                         return true;
                     }
@@ -167,17 +167,17 @@ namespace MatrixAB
             }
             return false;
         }
-        public static bool operator !=(MatrixFound A, MatrixFound B)
+        public static bool operator !=(MatrixFound One, MatrixFound Two)
         {
-            if (A.SizeN != B.SizeN)
+            if (One.SizeN != Two.SizeN)
             {
                 return true;
             }
-            for (int ColumnIndex = 0; ColumnIndex < A.SizeN; ++ColumnIndex)
+            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < A.SizeN; ++RowIndex)
+                for (int RowIndex = 0; RowIndex < One.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex, RowIndex != B[ColumnIndex, RowIndex])
+                    if (One[ColumnIndex, RowIndex != Two[ColumnIndex, RowIndex])
                     {
                         return true;
                     }
@@ -185,14 +185,14 @@ namespace MatrixAB
             }
             return false;
         }
-        public static MatrixFound operator >(MatrixFound A, MatrixFound B)
+        public static MatrixFound operator >(MatrixFound One, MatrixFound Two)
         {
             var Result = new MatrixFound(A.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0;RowIndex < Result.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex,RowIndex] > B[ColumnIndex, RowIndex])
+                    if (One[ColumnIndex,RowIndex] > Two[ColumnIndex, RowIndex])
                     {
                         Result[ColumnIndex, RowIndex] = 1;
                     }
@@ -204,14 +204,14 @@ namespace MatrixAB
             }
             return Result;
         }
-        public static MatrixFound operator <(MatrixFound A,MatrixFound B)
+        public static MatrixFound operator <(MatrixFound One,MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
+            var Result = new MatrixFound(One.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex, RowIndex] < B[ColumnIndex, RowIndex])
+                    if (One[ColumnIndex, RowIndex] < Two[ColumnIndex, RowIndex])
                     {
                         Result[ColumnIndex,RowIndex] = 1;
                     }
@@ -224,14 +224,14 @@ namespace MatrixAB
             return Result;
         }
 
-        public static MatrixFound operator >=(MatrixFound A, MatrixFound B)
+        public static MatrixFound operator >=(MatrixFound One, MatrixFound Two)
         {
-            var Result = new MatrixFound(A.SizeN);
+            var Result = new MatrixFound(One.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex, RowIndex] >= B[ColumnIndex,RowIndex])
+                    if (One[ColumnIndex, RowIndex] >= Two[ColumnIndex,RowIndex])
                     {
                         Result[ColumnIndex, RowIndex] = 1;
                     }
@@ -244,14 +244,14 @@ namespace MatrixAB
             return Result;
 
         }
-        public static MatrixFound operator <=(MatrixFound A, MatrixFound B)
+        public static MatrixFound operator <=(MatrixFound One, MatrixFound Two)
         {
             var Result = newMatrixFound(A.SizeN);
             for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
                 for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                 {
-                    if (A[ColumnIndex, RowIndex] <= B[ColumnIndex, RowIndex])
+                    if (One[ColumnIndex, RowIndex] <= Two[ColumnIndex, RowIndex])
                     {
                         Result[ColumnIndex, RowIndex] = 1;
                     }
@@ -263,35 +263,35 @@ namespace MatrixAB
             }
             return Result;
         }
-        public static MatrixFound Minor(MatrixFound A, int Column, int Row)
+        public static MatrixFound Minor(MatrixFound One, int Column, int Row)
         {
            MatrixFound buf = new MatrixFound(A.SizeN - 1);
-            for (int ColumnIndex = 0; ColumnIndex < A.SizeN; ++ColumnIndex) 
+            for (int ColumnIndex = 0; ColumnIndex < One.SizeN; ++ColumnIndex) 
             { 
-                for (int RowIndex = 0;RowIndex < A.SizeN; ++RowIndex) 
+                for (int RowIndex = 0;RowIndex < One.SizeN; ++RowIndex) 
                 {
                     if((RowIndex != Row) || (ColumnIndex != Column))
                     {
-                        if (ColumnIndex > Column && RowIndex < Row) buf[ColumnIndex - 1,RowIndex] = A[ColumnIndex, RowIndex];
-                        if (ColumnIndex < Column && RowIndex > Row) buf[ColumnIndex, RowIndex - 1] = A[ColumnIndex, RowIndex];
-                        if (ColumnIndex > Column && RowIndex > Row) buf[ColumnIndex - 1, RowIndex - 1] = A[ColumnIndex, RowIndex];
-                        if (ColumnIndex < Column && RowIndex < Row) buf[ColumnIndex, RowIndex] = A[ColumnIndex, RowIndex];
+                        if (ColumnIndex > Column && RowIndex < Row) buf[ColumnIndex - 1,RowIndex] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex < Column && RowIndex > Row) buf[ColumnIndex, RowIndex - 1] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex > Column && RowIndex > Row) buf[ColumnIndex - 1, RowIndex - 1] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex < Column && RowIndex < Row) buf[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex];
                     }
                 }
             }
             return buf;
         }
-        public double Determ(MatrixInf A)
+        public double Determ(MatrixInf One)
         {
-            double det = 0;
-            int Rank = A.SizeN;
-            if (Rank == 1) det = A[0, 0];
-            if (Rank == 2) det = A[0, 0] * A[1, 1] - A[0, 1] * A[1, 0];
+            double Det = 0;
+            int Rank = One.SizeN;
+            if (Rank == 1) Det = One[0, 0];
+            if (Rank == 2) Det = One[0, 0] * One[1, 1] - A[0, 1] * One[1, 0];
             if (Rank > 2)
             {
-                for (int Index = 0; Index < A.SizeN; ++Index) 
+                for (int Index = 0; Index < One.SizeN; ++Index) 
                 {
-                    det += Math.Pow(-1, 0 + Index) * A[0, Index] * Determ(Minor( A, 0, Index));
+                    Det += Math.Pow(-1, 0 + Index) * One[0, Index] * Determ(Minor( One, 0, Index));
                 }
             }
             return det;
@@ -319,22 +319,22 @@ namespace MatrixAB
             }
             return subMatrix;
         }
-        public MatrixFound Inverse(MatrixFound A)
+        public MatrixFound Inverse(MatrixFound One)
         {
             var Determinant = Determ(A);
             if (Determinant == 0)
             {
                 throw new InvalidOperationException("Матрица не имеет инверсии");
             }
-            var Result = new MatrixFound(A.SizeN);
+            var Result = new MatrixFound(One.SizeN);
 
             int sign = 1;
-            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ColumnIndex++)
+            for (int ColumnIndex = 0; ColumnIndex < Result.SizeN; ++ColumnIndex)
             {
-                for (int RowIndex = 0; RowIndex < Result.SizeN; RowIndex++)
+                for (int RowIndex = 0; RowIndex < Result.SizeN; ++RowIndex)
                 {
                     var subMatrix = SubMatrix(ColumnIndex, RowIndex);
-                    Result[RowIndex, ColumnIndex] = sign * subMatrix.Determ(A) / Determinant;
+                    Result[RowIndex, ColumnIndex] = sign * subMatrix.Determ(One) / Determinant;
                     sign = -sign;
                 }
             }
@@ -354,7 +354,6 @@ namespace MatrixAB
                 Result += "\n";
             }
             return Result ;
-
         }
     }
 }
