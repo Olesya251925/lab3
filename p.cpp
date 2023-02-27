@@ -297,11 +297,11 @@ namespace SquareMatrix
             return det;
         }
 
-        private MatrixFound SubMatrix(int Row, int Column)
+        private MatrixFound MatrixRep(int Row, int Column)
         {
-            var subMatrix = new MatrixFound(Size - 1);
+            var matrixRep = new MatrixFound(Size - 1);
 
-            int subRow = 0;
+            int matrixRep = 0;
             for (int RowIndex = 0; RowIndex < Size; ++RowIndex)
             {
                 if (RowIndex == Row)
@@ -312,12 +312,12 @@ namespace SquareMatrix
                     if (ColumnIndex == Column)
                         continue;
 
-                    subMatrix[subColumn, subColumn] = Arry[ColumnIndex, ColumnIndex];
-                    ++subColumn;
+                    subMatrix[repColumn, repColumn] = Arry[ColumnIndex, ColumnIndex];
+                    ++repColumn;
                 }
-                ++subRow;
+                ++repRow;
             }
-            return subMatrix;
+            return matrixRep;
         }
         public MatrixFound Inverse(MatrixFound One)
         {
@@ -333,8 +333,8 @@ namespace SquareMatrix
             {
                 for (int RowIndex = 0; RowIndex < Result.MatrixSize; ++RowIndex)
                 {
-                    var subMatrix = SubMatrix(ColumnIndex, RowIndex);
-                    Result[RowIndex, ColumnIndex] = sign * subMatrix.Determ(One) / Determinant;
+                    var repMatrix = repMatrix(ColumnIndex, RowIndex);
+                    Result[RowIndex, ColumnIndex] = sign * repMatrix.Determ(One) / Determinant;
                     sign = -sign;
                 }
             }
