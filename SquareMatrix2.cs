@@ -42,7 +42,7 @@ namespace SquareMatrix
                 }
             }
         }
-        public MatrixFound Copy()
+        public MatrixFound DeepCopy()
         {
            MatrixFound clone = (MatrixFound)this.MemberwiseClone();
            return clone;
@@ -265,21 +265,21 @@ namespace SquareMatrix
         }
         public static MatrixFound Minor(MatrixFound One, int Column, int Row)
         {
-           MatrixFound buf = new MatrixFound(One.MatrixSize - 1);
+           MatrixFound buffer = new MatrixFound(One.MatrixSize - 1);
             for (int ColumnIndex = 0; ColumnIndex < One.MatrixSize; ++ColumnIndex) 
             { 
                 for (int RowIndex = 0;RowIndex < One.MatrixSize; ++RowIndex) 
                 {
                     if((RowIndex != Row) || (ColumnIndex != Column))
                     {
-                        if (ColumnIndex > Column && RowIndex < Row) buf[ColumnIndex - 1,RowIndex] = One[ColumnIndex, RowIndex];
-                        if (ColumnIndex < Column && RowIndex > Row) buf[ColumnIndex, RowIndex - 1] = One[ColumnIndex, RowIndex];
-                        if (ColumnIndex > Column && RowIndex > Row) buf[ColumnIndex - 1, RowIndex - 1] = One[ColumnIndex, RowIndex];
-                        if (ColumnIndex < Column && RowIndex < Row) buf[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex > Column && RowIndex < Row) buffer[ColumnIndex - 1,RowIndex] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex < Column && RowIndex > Row) buffer[ColumnIndex, RowIndex - 1] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex > Column && RowIndex > Row) buffer[ColumnIndex - 1, RowIndex - 1] = One[ColumnIndex, RowIndex];
+                        if (ColumnIndex < Column && RowIndex < Row) buffer[ColumnIndex, RowIndex] = One[ColumnIndex, RowIndex];
                     }
                 }
             }
-            return buf;
+            return buffer;
         }
         public double Determ(MatrixInf One)
         {
@@ -294,7 +294,7 @@ namespace SquareMatrix
                     Det += Math.Pow(-1, 0 + Index) * One[0, Index] * Determ(Minor( One, 0, Index));
                 }
             }
-            return det;
+            return Det;
         }
 
         private MatrixFound MatrixRep(int Row, int Column)
